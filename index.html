@@ -176,7 +176,7 @@
 						<section>
 							<form method="post"
 								action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeVnUoIKPXX1DDTcOKJX4DcouSaxS3q2Zeen1kTbKr0Tq76ow/formResponse"
-								target="hidden_iframe" onsubmit="submitted=true;">
+								name="contactForm" target="hidden_iframe" onsubmit="return checkRecaptcha();">
 								<div class="row gtr-50">
 									<div class="col-6 col-12-small">
 										<input name="entry.2005620554" placeholder="名前" type="text" />
@@ -187,6 +187,9 @@
 									<div class="col-12">
 										<textarea name="entry.839337160" placeholder="問い合わせ内容"></textarea>
 									</div>
+									<div class="g-recaptcha" data-sitekey="6LcG-VggAAAAAAx5wdjB5ZumNXXReb2NvteskHZK">
+									</div>
+									<div id="recaptcha-error"></div>
 									<div class="col-12">
 										<input class="icon solid fa-envelope" type="submit" value="送信">
 									</div>
@@ -219,6 +222,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 	<script type="text/javascript">
 		$('a[href^="#"]').click(function () {
 			var speed = 800;
@@ -230,6 +234,19 @@
 			$('body,html').animate({ scrollTop: target.offset().top }, speed, 'swing');
 			return false;
 		});
+		function checkRecaptcha() {
+			var response = grecaptcha.getResponse();
+			if (response.length == 0) {
+				//reCaptcha 未認証
+				document.getElementById('recaptcha-error').innerHTML = "reCaptchaにチェックを入れてください";
+				return false;
+			}
+			else {
+				//reCaptch 認証
+				document.myForm.elements['entry.**********'].value = response; // recaptchaのname属性
+				document.myForm.submit();
+			}
+		}
 	</script>
 
 </body>
