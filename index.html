@@ -187,7 +187,8 @@
 									<div class="col-12">
 										<textarea name="entry.839337160" placeholder="問い合わせ内容"></textarea>
 									</div>
-									<div class="g-recaptcha" data-sitekey="6LcG-VggAAAAAAx5wdjB5ZumNXXReb2NvteskHZK">
+									<div class="g-recaptcha" name="recaptchaToken"
+										data-sitekey="6LcG-VggAAAAAAx5wdjB5ZumNXXReb2NvteskHZK">
 									</div>
 									<div id="recaptcha-error"></div>
 									<div class="col-12">
@@ -224,6 +225,7 @@
 	<script src="assets/js/main.js"></script>
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 	<script type="text/javascript">
+		let submitted = false;
 		$('a[href^="#"]').click(function () {
 			var speed = 800;
 			var href = $(this).attr("href");
@@ -243,12 +245,13 @@
 			}
 			else {
 				//reCaptch 認証
-				document.myForm.elements['entry.**********'].value = response; // recaptchaのname属性
-				document.myForm.submit();
+				document.contactForm.elements['recaptchaToken'].value = response; // recaptchaのname属性
+				submitted = true;
+				document.contactForm.submit();
 			}
 		}
 	</script>
-
+	<iframe name="hidden_iframe" style="display:none;" onload="if(submitted){window.location='thanks.html';}"></iframe>
 </body>
 
 </html>
