@@ -2069,6 +2069,10 @@ button.alt:active,
 	display: block;
 }
 
+.aln-left {
+	text-align: left;
+}
+
 /* Nav */
 
 #nav {
