@@ -327,6 +327,12 @@ br.clear {
 	color: #ff3333;
 }
 
+/* ツイート埋め込みを中央寄せ */
+.twitter-timeline {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 @media screen and (max-width: 1680px) {
 
 	.container {
